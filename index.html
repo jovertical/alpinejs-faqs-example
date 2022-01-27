@@ -7,7 +7,73 @@
         <title>Alpine.js FAQ example</title>
     </head>
     <body>
-        <div id="app"></div>
+        <div class="bg-gray-50">
+            <div class="max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
+                <div class="max-w-3xl mx-auto divide-y-2 divide-gray-200">
+                    <h2
+                        class="text-center text-3xl font-extrabold text-gray-900 sm:text-4xl"
+                    >
+                        Frequently asked questions
+                    </h2>
+
+                    <dl
+                        x-data="faqList()"
+                        class="mt-6 space-y-6 divide-y divide-gray-200"
+                    >
+                        <template x-for="(faq, faqIdx) in faqs">
+                            <div x-data="{ show: false }" class="pt-6">
+                                <dt class="text-lg">
+                                    <!-- Expand/collapse question button -->
+                                    <button
+                                        type="button"
+                                        class="text-left w-full flex justify-between items-start text-gray-400"
+                                        aria-controls="faq-0"
+                                        x-bind:aria-expanded="show"
+                                        @click="show = !show"
+                                    >
+                                        <span
+                                            x-text="faq.question"
+                                            class="font-medium text-gray-900"
+                                        ></span>
+                                        <span
+                                            class="ml-6 h-7 flex items-center"
+                                        >
+                                            <svg
+                                                class="rotate-0 h-6 w-6 transform"
+                                                x-bind:class="{
+                                                    '-rotate-180': show,
+                                                    'rotate-0': !show
+                                                }"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                                aria-hidden="true"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M19 9l-7 7-7-7"
+                                                />
+                                            </svg>
+                                        </span>
+                                    </button>
+                                </dt>
+
+                                <dd x-show="show" class="mt-2 pr-12" id="faq-0">
+                                    <p
+                                        x-text="faq.answer"
+                                        class="text-base text-gray-500"
+                                    ></p>
+                                </dd>
+                            </div>
+                        </template>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
         <script type="module" src="/main.js"></script>
     </body>
 </html>
